@@ -1,5 +1,6 @@
 import React, { use, useEffect, useState } from "react";
 import ProductCard from "../../component/ProductCard/ProductCard";
+import axios from "axios";
 import Loader from "../../component/Loading/Loading";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";

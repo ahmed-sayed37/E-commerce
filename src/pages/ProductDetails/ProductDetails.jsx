@@ -21,6 +21,13 @@ export default function ProductDetails() {
   const { addProductToCart } = useContext(cartContext);
   const { addToFavorites, isFavorite, removeFromFavorites } = useContext(FavoritesContext);
 
+
+
+
+
+
+
+  
   const { data, isLoading, isError, error } = useGetApis(`products/${id}`);
 
   useEffect(() => {
