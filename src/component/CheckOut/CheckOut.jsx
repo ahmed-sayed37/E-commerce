@@ -169,7 +169,7 @@ export default function CheckOut({ totalCartPrice }) {
               onClick={() => {
                 setPay("online");
               }}
-              className="btn cursor-pointer flex py-2 text-nowrap items-center justify-center gap-2 hover:text-white hover:bg-mainColor dark:hover:bg-green-600 bg-white dark:bg-gray-700 text-mainColor dark:text-green-400 w-full rounded-md border border-mainColor dark:border-green-500 transition-all duration-300 font-['Encode_Sans_Expanded']"
+              className="btn cursor-pointer flex py-3 text-nowrap items-center justify-center gap-2 hover:text-white hover:bg-mainColor dark:hover:bg-green-600 bg-white dark:bg-gray-700 text-mainColor dark:text-green-400 w-full rounded-md border border-mainColor dark:border-green-500 transition-all duration-300 font-['Encode_Sans_Expanded']"
             >
               <span>Online Order</span>
             </button>

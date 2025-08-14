@@ -42,11 +42,19 @@ useEffect(() => {
     console.log("Current URL:", currentUrl);
     console.log("Return to orders flag:", returnToOrders);
     
+    // Check if current URL has double slashes and fix it
+    if (currentUrl.includes("//allorders")) {
+      console.log("Detected double slashes in URL, fixing...");
+      const fixedUrl = currentUrl.replace("//allorders", "/#/allorders");
+      console.log("Fixed URL:", fixedUrl);
+      window.location.replace(fixedUrl);
+      return;
+    }
+    
     // Check if we're returning from payment and should redirect to orders
     if (returnToOrders === 'true' && 
         currentUrl.includes("ahmed-sayed37.github.io/E-commerce") && 
-        !currentUrl.includes("#/") &&
-        !currentUrl.includes("session_id")) {
+        !currentUrl.includes("#/")) {
       
       console.log("Detected payment return, redirecting to orders...");
       
@@ -59,8 +67,10 @@ useEffect(() => {
       
       // Redirect to orders page with a small delay to ensure proper loading
       setTimeout(() => {
-        // Use hash navigation instead of full URL replacement
-        window.location.hash = "#/allorders";
+        // Use full URL replacement to avoid double slashes
+        const targetUrl = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
+        console.log("Redirecting to:", targetUrl);
+        window.location.href = targetUrl;
       }, 500);
     }
     
@@ -78,7 +88,9 @@ useEffect(() => {
       
       // Redirect to orders page
       setTimeout(() => {
-        window.location.hash = "#/allorders";
+        const targetUrl = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
+        console.log("Redirecting to:", targetUrl);
+        window.location.href = targetUrl;
       }, 500);
     }
   };

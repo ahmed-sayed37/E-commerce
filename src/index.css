@@ -15,7 +15,7 @@
 }
 
 /* navbar helpers */
-.nav-link { @apply relative hover:font-bold hover:text-green-600 transition-all; }
+.nav-link { @apply relative hover:font-bold hover:text-first transition-all; }
 .nav-btn { @apply relative hover:font-bold hover:text-red-600 transition-all; }
 
 html,
