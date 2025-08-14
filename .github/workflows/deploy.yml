@@ -23,17 +23,14 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      # مهم: امسح الـ lock عشان اختلاف المنصّة (Windows vs Linux)
+      # نتفادى قفل platform في lockfile (ويندوز vs لينكس)
       - run: rm -f package-lock.json
-      # اجبر تثبيت يعتمد على المنصة الحالية
       - run: npm install --no-audit --no-fund
       - run: npm run build
-      # لو بتستخدم BrowserRouter فعّل السطر ده:
-      # - run: cp dist/index.html dist/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs
+          path: ./dist   # مهم: dist
 
   deploy:
     needs: build
@@ -42,5 +39,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
