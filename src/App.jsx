@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -35,12 +35,18 @@ const queryClient = new QueryClient();
 const [isRedirecting, setIsRedirecting] = useState(false);
 
 useEffect(() => {
-  // Check if we need to redirect after payment
-  if (window.location.href.includes("ahmed-sayed37.github.io/E-commerce") && !isRedirecting) {
-    setIsRedirecting(true);
-    window.location.href = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
-  }
-}, []);
+  const handlePaymentReturn = () => {
+    const currentUrl = window.location.href;
+    if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce") && 
+        !currentUrl.includes("#/") && 
+        !isRedirecting) {
+      setIsRedirecting(true);
+      window.location.replace("https://ahmed-sayed37.github.io/E-commerce/#/allorders");
+    }
+  };
+
+  handlePaymentReturn();
+}, [isRedirecting]);
 
   return (
     <>
