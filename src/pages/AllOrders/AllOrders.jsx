@@ -12,7 +12,7 @@ export default function AllOrders() {
   if (isLoading) {
     return (
       <div className="container mx-auto max-w-4xl py-8">
-        <div className="animate-pulse bg-gray-200 h-10 w-1/2 mb-8 rounded" />
+        <div className="animate-pulse bg-gray-200 h-10 w-1/2 mb-8 rounded shadow-2xl" />
         {[...Array(2)].map((_, i) => (
           <div key={i} className="bg-white rounded-lg shadow p-6 mb-8 border border-green-200">
             <div className="h-6 bg-gray-200 rounded w-1/3 mb-4 animate-pulse" />

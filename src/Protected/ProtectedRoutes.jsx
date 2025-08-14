@@ -22,6 +22,6 @@ export default function ProtectedRoutes({ children }) {
 }
 
 function isValidToken(token) {
-  if (!token || typeof token !== 'string' || token.trim() === '') return true;
+  if (!token || typeof token !== 'string' || token.trim() === '') return false;
   return token.length > 20;
 }

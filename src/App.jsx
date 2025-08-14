@@ -2,7 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { X } from "lucide-react";
 import Home from "./pages/Home/Home";
 import Footer from "./component/Footer/Footer";
@@ -30,110 +30,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 
-const routes = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/home",
-        element: (
-          <ProtectedRoutes>
-            <Home />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/products",
-        element: (
-          <ProtectedRoutes>
-            {" "}
-            <Products />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/category/:categoryId",
-        element: (
-          <ProtectedRoutes>
-            <Products />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/brand/:brandId",
-        element: (
-          <ProtectedRoutes>
-            <Products />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/productDetails/:id",
-        element: (
-          <ProtectedRoutes>
-           
-            <ProductDetails />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/Categories",
-        element: (
-          <ProtectedRoutes>
-            {" "}
-            <Categories />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/Cart",
-        element: (
-          <ProtectedRoutes>
-            <Cart />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/allorders",
-        element: (
-          <ProtectedRoutes>
-            <AllOrders />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/Brands",
-        element: (
-          <ProtectedRoutes>
-            <Brands />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/Orders",
-        element: (
-          <ProtectedRoutes>
-            <Orders />
-          </ProtectedRoutes>
-        ),
-      },
-      {
-        path: "/favorites",
-        element: (
-          <ProtectedRoutes>
-            <Favorites />
-          </ProtectedRoutes>
-        ),
-      },
-      { path: "/login", element: <Login /> },
-      { path: "/register", element: <Register /> },
-      { path: "/forgot-password", element: <ForgotPassword /> },
-      { path: "/reset-code", element: <ResetCode /> },
-      { path: "/new-password", element: <NewPassword /> },
-    ],
-  },
-]);
 function App() {
 const queryClient = new QueryClient();
 
@@ -143,7 +39,29 @@ const queryClient = new QueryClient();
         <AuthContextProvider>
           <CartContextProvider>
             <FavoritesProvider>
-              <RouterProvider router={routes} />
+              <HashRouter>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    <Route index element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+                    <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+                    <Route path="/products" element={<ProtectedRoutes><Products /></ProtectedRoutes>} />
+                    <Route path="/category/:categoryId" element={<ProtectedRoutes><Products /></ProtectedRoutes>} />
+                    <Route path="/brand/:brandId" element={<ProtectedRoutes><Products /></ProtectedRoutes>} />
+                    <Route path="/productDetails/:id" element={<ProtectedRoutes><ProductDetails /></ProtectedRoutes>} />
+                    <Route path="/Categories" element={<ProtectedRoutes><Categories /></ProtectedRoutes>} />
+                    <Route path="/Cart" element={<ProtectedRoutes><Cart /></ProtectedRoutes>} />
+                    <Route path="/allorders" element={<ProtectedRoutes><AllOrders /></ProtectedRoutes>} />
+                    <Route path="/Brands" element={<ProtectedRoutes><Brands /></ProtectedRoutes>} />
+                    <Route path="/Orders" element={<ProtectedRoutes><AllOrders /></ProtectedRoutes>} />
+                    <Route path="/favorites" element={<ProtectedRoutes><Favorites /></ProtectedRoutes>} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-code" element={<ResetCode />} />
+                    <Route path="/new-password" element={<NewPassword />} />
+                  </Route>
+                </Routes>
+              </HashRouter>
               <Toaster />
             </FavoritesProvider>
           </CartContextProvider>

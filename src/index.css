@@ -1,35 +1,22 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-@utility container {
-  margin: 0 auto;
-  max-width: 1200px;
-  
-}
-
-@layer components {
-  .container {
-    @apply container;
-  }
-
-
-  .nav-link {
-    @apply relative hover:font-bold hover:text-green-600 transition-all;
-  }
-
-  .nav-btn {
-    @apply relative hover:font-bold hover:text-red-600 transition-all;
-  }
-}
-
-
 @theme {
   --color-mainColor: #0aad0a;
   --color-first: #01854C;
 }
 
+/* Enable dark mode variant via class on html/body */
+@custom-variant dark (&:where(.dark, .dark *));
 
+/* custom container utility used across the app */
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* navbar helpers */
+.nav-link { @apply relative hover:font-bold hover:text-green-600 transition-all; }
+.nav-btn { @apply relative hover:font-bold hover:text-red-600 transition-all; }
 
 html,
 body,
