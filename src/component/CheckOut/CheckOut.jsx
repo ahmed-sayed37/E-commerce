@@ -41,7 +41,7 @@ export default function CheckOut({ totalCartPrice }) {
   async function payOnline(values) {
     try {
       const { data } = await axios.post(
-        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cart.cartId}?url=https://ahmed-sayed37.github.io/E-commerce`,
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cart.cartId}?url=https://ahmed-sayed37.github.io/E-commerce/#/allorders`,
         {
           shippingAddress: values,
         },
