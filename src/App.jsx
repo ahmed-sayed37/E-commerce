@@ -32,6 +32,15 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
 const queryClient = new QueryClient();
+const [isRedirecting, setIsRedirecting] = useState(false);
+
+useEffect(() => {
+  // Check if we need to redirect after payment
+  if (window.location.href.includes("ahmed-sayed37.github.io/E-commerce") && !isRedirecting) {
+    setIsRedirecting(true);
+    window.location.href = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
+  }
+}, []);
 
   return (
     <>
