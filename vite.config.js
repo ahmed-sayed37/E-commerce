@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   base: '/E-commerce/',
+  build: { outDir: 'docs' },
   plugins: [tailwindcss(), react()],
 })
 
