@@ -33,14 +33,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 function App() {
 const queryClient = new QueryClient();
 
-// IMMEDIATE URL FIX - Run before anything else
 const currentUrl = window.location.href;
-if (currentUrl.includes("//allorders") || currentUrl.includes("ahmed-sayed37.github.io/E-commerce//")) {
-  console.log("🚨 CRITICAL: Immediate URL fix needed!");
+if (currentUrl.includes("/#/allorders") || currentUrl.includes("ahmed-sayed37.github.io/E-commerce/#/")) {
   const fixedUrl = currentUrl.replace("//allorders", "/#/allorders").replace("//", "/#/");
-  console.log("✅ Immediate fix:", fixedUrl);
   window.location.replace(fixedUrl);
-  return null; // Prevent rendering until URL is fixed
+  return null; 
 }
 
 useEffect(() => {
@@ -54,18 +51,14 @@ useEffect(() => {
     
     // IMMEDIATE FIX: Check if current URL has double slashes and fix it immediately
     if (currentUrl.includes("//allorders")) {
-      console.log("🚨 CRITICAL: Detected double slashes in URL, fixing immediately...");
       const fixedUrl = currentUrl.replace("//allorders", "/#/allorders");
-      console.log("✅ Fixed URL:", fixedUrl);
       window.location.replace(fixedUrl);
       return;
     }
     
     // Also check for any other double slash patterns
     if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce//")) {
-      console.log("🚨 CRITICAL: Detected double slashes in base URL, fixing immediately...");
       const fixedUrl = currentUrl.replace("//", "/#/");
-      console.log("✅ Fixed URL:", fixedUrl);
       window.location.replace(fixedUrl);
       return;
     }
@@ -73,20 +66,17 @@ useEffect(() => {
     // Check if we're returning from payment and should redirect to orders
     if (returnToOrders === 'true' && 
         currentUrl.includes("ahmed-sayed37.github.io/E-commerce") && 
-        !currentUrl.includes("#/")) {
+        !currentUrl.includes("#/AllOrders")) {
       
-      console.log("Detected payment return, redirecting to orders...");
       
       // Clear the flag
       localStorage.removeItem('returnToOrders');
       
       // Show success message
-      console.log("Payment completed successfully, redirecting to orders...");
-      toast.success("Payment completed successfully! Redirecting to orders...");
+      toast.success("Payment completed successfully...");
       
       // Redirect to orders page immediately
       const targetUrl = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
-      console.log("Redirecting to:", targetUrl);
       window.location.replace(targetUrl);
     }
     
