@@ -34,8 +34,25 @@ function App() {
 const queryClient = new QueryClient();
 
 const currentUrl = window.location.href;
-if (currentUrl.includes("/#/allorders") || currentUrl.includes("ahmed-sayed37.github.io/E-commerce/#/")) {
-  const fixedUrl = currentUrl.replace("//allorders", "/#/allorders").replace("//", "/#/");
+console.log("🔍 Current URL on load:", currentUrl);
+
+// Check for URL without hash that should have hash
+if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce/allorders") && !currentUrl.includes("#")) {
+  console.log("🚨 CRITICAL: URL missing hash, fixing immediately!");
+  const fixedUrl = currentUrl.replace("/allorders", "/#/allorders");
+  console.log("✅ Fixed URL:", fixedUrl);
+  window.location.replace(fixedUrl);
+  return null; 
+}
+
+// Also check for any other routes that should have hash
+if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce/") && 
+    !currentUrl.includes("#") && 
+    !currentUrl.includes("ahmed-sayed37.github.io/E-commerce/?") &&
+    currentUrl !== "https://ahmed-sayed37.github.io/E-commerce/") {
+  console.log("🚨 CRITICAL: URL missing hash for route, fixing immediately!");
+  const fixedUrl = currentUrl.replace("/E-commerce/", "/E-commerce/#/");
+  console.log("✅ Fixed URL:", fixedUrl);
   window.location.replace(fixedUrl);
   return null; 
 }
@@ -49,16 +66,23 @@ useEffect(() => {
     console.log("Current URL:", currentUrl);
     console.log("Return to orders flag:", returnToOrders);
     
-    // IMMEDIATE FIX: Check if current URL has double slashes and fix it immediately
-    if (currentUrl.includes("//allorders")) {
-      const fixedUrl = currentUrl.replace("//allorders", "/#/allorders");
+    // IMMEDIATE FIX: Check if current URL is missing hash
+    if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce/allorders") && !currentUrl.includes("#")) {
+      console.log("🚨 CRITICAL: URL missing hash in useEffect, fixing immediately!");
+      const fixedUrl = currentUrl.replace("/allorders", "/#/allorders");
+      console.log("✅ Fixed URL:", fixedUrl);
       window.location.replace(fixedUrl);
       return;
     }
     
-    // Also check for any other double slash patterns
-    if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce//")) {
-      const fixedUrl = currentUrl.replace("//", "/#/");
+    // Also check for any other routes missing hash
+    if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce/") && 
+        !currentUrl.includes("#") && 
+        !currentUrl.includes("ahmed-sayed37.github.io/E-commerce/?") &&
+        currentUrl !== "https://ahmed-sayed37.github.io/E-commerce/") {
+      console.log("🚨 CRITICAL: Route missing hash in useEffect, fixing immediately!");
+      const fixedUrl = currentUrl.replace("/E-commerce/", "/E-commerce/#/");
+      console.log("✅ Fixed URL:", fixedUrl);
       window.location.replace(fixedUrl);
       return;
     }
@@ -66,17 +90,19 @@ useEffect(() => {
     // Check if we're returning from payment and should redirect to orders
     if (returnToOrders === 'true' && 
         currentUrl.includes("ahmed-sayed37.github.io/E-commerce") && 
-        !currentUrl.includes("#/AllOrders")) {
+        !currentUrl.includes("#/allorders")) {
       
+      console.log("🎯 Detected payment return, redirecting to orders...");
       
       // Clear the flag
       localStorage.removeItem('returnToOrders');
       
       // Show success message
-      toast.success("Payment completed successfully...");
+      toast.success("Payment completed successfully! Redirecting to orders...");
       
       // Redirect to orders page immediately
       const targetUrl = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
+      console.log("🎯 Redirecting to:", targetUrl);
       window.location.replace(targetUrl);
     }
     
