@@ -39,10 +39,16 @@ useEffect(() => {
     const currentUrl = window.location.href;
     const returnToOrders = localStorage.getItem('returnToOrders');
     
+    console.log("Current URL:", currentUrl);
+    console.log("Return to orders flag:", returnToOrders);
+    
     // Check if we're returning from payment and should redirect to orders
     if (returnToOrders === 'true' && 
         currentUrl.includes("ahmed-sayed37.github.io/E-commerce") && 
-        !currentUrl.includes("#/")) {
+        !currentUrl.includes("#/") &&
+        !currentUrl.includes("session_id")) {
+      
+      console.log("Detected payment return, redirecting to orders...");
       
       // Clear the flag
       localStorage.removeItem('returnToOrders');
@@ -53,7 +59,26 @@ useEffect(() => {
       
       // Redirect to orders page with a small delay to ensure proper loading
       setTimeout(() => {
-        window.location.replace("https://ahmed-sayed37.github.io/E-commerce/#/allorders");
+        // Use hash navigation instead of full URL replacement
+        window.location.hash = "#/allorders";
+      }, 500);
+    }
+    
+    // Also check for Stripe success parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    const success = urlParams.get('success');
+    
+    if (sessionId || success === 'true') {
+      console.log("Detected Stripe success parameters, redirecting to orders...");
+      toast.success("Payment completed successfully! Redirecting to orders...");
+      
+      // Clear any existing flags
+      localStorage.removeItem('returnToOrders');
+      
+      // Redirect to orders page
+      setTimeout(() => {
+        window.location.hash = "#/allorders";
       }, 500);
     }
   };
