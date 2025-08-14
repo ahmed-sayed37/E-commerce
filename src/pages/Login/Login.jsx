@@ -81,7 +81,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-6 sm:space-y-8 shadow-2xl shadow-gray-400 bg-white border border-gray-200 sm:rounded- rounded-2xl p-20">
+<div className="max-w-md w-full space-y-6 sm:space-y-8 shadow-2xl shadow-gray-400 bg-white border border-gray-200 sm:rounded-2xl p-8">
         <div>
           <h2 className="mt-6 text-center text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-900">
             Sign in to your account
@@ -121,7 +121,7 @@ export default function Login() {
             )}
           </div>
 
-          <div className="relative">
+          <div className="relative min-h-[4.5rem]">
             <label
               htmlFor="password"
               className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-800"
@@ -140,7 +140,7 @@ export default function Login() {
               value={formik.values.password}
             />
             <div
-              className="absolute right-3 sm:right-4 top-[50%] cursor-pointer"
+              className="absolute right-3 sm:right-4 top-[2rem] transform cursor-pointer z-20"
               onClick={toggleShowPassword}
             >
               {showPassword === 'password' ? <svg
@@ -149,7 +149,7 @@ export default function Login() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-5 sm:size-6 text-gray-600 dark:text-gray-700"
+                className="size-5 sm:size-6 text-gray-600 dark:text-gray-700 hover:text-gray-800 dark:hover:text-gray-600 transition-colors pointer-events-auto"
               >
                 <path
                   strokeLinecap="round"
@@ -165,7 +165,7 @@ export default function Login() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-5 sm:size-6 text-gray-600 dark:text-gray-700"
+                className="size-5 sm:size-6 text-gray-600 dark:text-gray-700 hover:text-gray-800 dark:hover:text-gray-600 transition-colors pointer-events-auto"
               >
                 <path
                   strokeLinecap="round"

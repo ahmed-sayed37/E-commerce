@@ -84,27 +84,27 @@ export default function CheckOut({ totalCartPrice }) {
 
   return (
     <>
-      <div className="container  max-w-[535px] mt-12">
+      <div className="container max-w-[535px] mt-12">
         <span className="block mt-12 mx-auto w-[200px] rounded-full h-[2px] bg-mainColor"></span>
-        <h2 className="text-center my-2 font-bold text-lg Outfit">Check Out</h2>
-        <span className="block  mx-auto w-[200px] rounded-full h-[2px] bg-mainColor"></span>
+        <h2 className="text-center my-2 font-bold text-lg text-gray-900 dark:text-white font-['Encode_Sans_Expanded']">Check Out</h2>
+        <span className="block mx-auto w-[200px] rounded-full h-[2px] bg-mainColor"></span>
 
         <form
           onSubmit={formik.handleSubmit}
           id="checkOut"
-          className="w-full p-8 border border-gray-300 rounded-lg duration-700 target:border-darkPrimary   flex flex-col gap-6 mt-12"
+          className="w-full p-8 border border-gray-300 dark:border-gray-600 rounded-lg duration-700 target:border-darkPrimary flex flex-col gap-6 mt-12 bg-white dark:bg-gray-800 transition-colors duration-300"
         >
-          <h3 className="font-bold text-lg -ml-2">Cart totals</h3>
+          <h3 className="font-bold text-lg -ml-2 text-gray-900 dark:text-white font-['Encode_Sans_Expanded']">Cart totals</h3>
 
-          <div className="flex  gap-4 items-center">
-            <span className="font-bold">Total :</span>
-            <span className="text-primary font-semibold">
+          <div className="flex gap-4 items-center">
+            <span className="font-bold text-gray-900 dark:text-white">Total :</span>
+            <span className="text-mainColor font-semibold dark:text-green-400">
               ${totalCartPrice} USD
             </span>
           </div>
           <div>
             <input
-              className="p-2 w-full rounded-xl border-1 border-primary focus:border-darkPrimary focus:border-2"
+              className="p-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-mainColor focus:border-2 transition-colors duration-300"
               autoComplete="off"
               type="text"
               placeholder="Enter Your City Name"
@@ -115,13 +115,13 @@ export default function CheckOut({ totalCartPrice }) {
             />
           </div>
           {formik.errors.city && formik.touched.city && (
-            <p className="text-red-600 font-bold text-sm -my-3 ">
+            <p className="text-red-600 dark:text-red-400 font-bold text-sm -my-3">
               {formik.errors.city}
             </p>
           )}
           <div>
             <input
-              className="p-2 w-full rounded-xl border-1 border-primary focus:border-darkPrimary focus:border-2"
+              className="p-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-mainColor focus:border-2 transition-colors duration-300"
               autoComplete="off"
               type="tel"
               placeholder="Enter Your Phone"
@@ -132,13 +132,13 @@ export default function CheckOut({ totalCartPrice }) {
             />
           </div>
           {formik.errors.phone && formik.touched.phone && (
-            <p className="text-red-600 font-bold text-sm -my-3 ">
+            <p className="text-red-600 dark:text-red-400 font-bold text-sm -my-3">
               {formik.errors.phone}
             </p>
           )}
           <div>
             <textarea
-              className="p-2 w-full rounded-xl border-1 border-primary focus:border-darkPrimary focus:border-2"
+              className="p-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-mainColor focus:border-2 transition-colors duration-300"
               placeholder="Details"
               name="details"
               value={formik.values.details}
@@ -147,41 +147,29 @@ export default function CheckOut({ totalCartPrice }) {
             />
           </div>
           {formik.errors.details && formik.touched.details && (
-            <p className="text-red-600 font-bold text-sm -my-3 ">
+            <p className="text-red-600 dark:text-red-400 font-bold text-sm -my-3">
               {formik.errors.details}
             </p>
           )}
 
-          <div className=" flex max-md:flex-col  gap-4 justify-between items-center">
+          <div className="flex max-md:flex-col gap-4 justify-between items-center">
             <button
               type="submit"
               onClick={() => {
                 setPay("cash");
               }}
-              className="btn cursor-pointer bg-mainColor rounded-md hover:bg-green-700 text-white w-full flex py-2 text-nowrap items-center justify-center gap-2"
+              className="btn cursor-pointer bg-mainColor hover:bg-green-700 dark:hover:bg-green-600 rounded-md text-white w-full flex py-2 text-nowrap items-center justify-center gap-2 transition-all duration-300 font-['Encode_Sans_Expanded']"
             >
-              {/* <img
-                className="size-10"
-                src={cashPaymentImg}
-                alt="Cash Payment Img"
-              /> */}
-              <span> Cash Order</span>
+              <span>Cash Order</span>
             </button>
             <button
               type="submit"
               onClick={() => {
                 setPay("online");
               }}
-              className="btn cursor-pointer flex py-2 text-nowrap items-center justify-center gap-2 hover:text-white hover:bg-darkPrimary bg-white text-darkPrimary w-full"
+              className="btn cursor-pointer flex py-2 text-nowrap items-center justify-center gap-2 hover:text-white hover:bg-mainColor dark:hover:bg-green-600 bg-white dark:bg-gray-700 text-mainColor dark:text-green-400 w-full rounded-md border border-mainColor dark:border-green-500 transition-all duration-300 font-['Encode_Sans_Expanded']"
             >
-              {/* <img
-                className="size-10 object-cover"
-                src={onlinePaymentImg}
-                alt="Online Payment Img"
-              /> */}
-              <span className="text-mainColor hover:text-white hover:bg-mainColor cursor-pointer flex py-2 text-nowrap items-center justify-center gap-2 w-full rounded-md ">
-                Online Order
-              </span>
+              <span>Online Order</span>
             </button>
           </div>
         </form>
