@@ -13,7 +13,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetCode from "./pages/ResetCode/ResetCode";
 import NewPassword from "./pages/NewPassword/NewPassword";
 import Layout from "./component/Layout/Layout";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import Products from "./pages/Products/Products";
 import Categories from "./pages/Categories/Categories";
 import Cart from "./pages/Cart/Cart";
@@ -32,21 +32,46 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
 const queryClient = new QueryClient();
-const [isRedirecting, setIsRedirecting] = useState(false);
 
 useEffect(() => {
+  // Handle payment return from Stripe
   const handlePaymentReturn = () => {
     const currentUrl = window.location.href;
-    if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce") && 
-        !currentUrl.includes("#/") && 
-        !isRedirecting) {
-      setIsRedirecting(true);
-      window.location.replace("https://ahmed-sayed37.github.io/E-commerce/#/allorders");
+    const returnToOrders = localStorage.getItem('returnToOrders');
+    
+    // Check if we're returning from payment and should redirect to orders
+    if (returnToOrders === 'true' && 
+        currentUrl.includes("ahmed-sayed37.github.io/E-commerce") && 
+        !currentUrl.includes("#/")) {
+      
+      // Clear the flag
+      localStorage.removeItem('returnToOrders');
+      
+      // Show success message
+      console.log("Payment completed successfully, redirecting to orders...");
+      toast.success("Payment completed successfully! Redirecting to orders...");
+      
+      // Redirect to orders page with a small delay to ensure proper loading
+      setTimeout(() => {
+        window.location.replace("https://ahmed-sayed37.github.io/E-commerce/#/allorders");
+      }, 500);
     }
   };
 
+  // Run on mount and also listen for URL changes
   handlePaymentReturn();
-}, [isRedirecting]);
+  
+  // Listen for popstate events (back/forward navigation)
+  const handlePopState = () => {
+    handlePaymentReturn();
+  };
+  
+  window.addEventListener('popstate', handlePopState);
+  
+  return () => {
+    window.removeEventListener('popstate', handlePopState);
+  };
+}, []);
 
   return (
     <>
