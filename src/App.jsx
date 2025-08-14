@@ -33,6 +33,16 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 function App() {
 const queryClient = new QueryClient();
 
+// IMMEDIATE URL FIX - Run before anything else
+const currentUrl = window.location.href;
+if (currentUrl.includes("//allorders") || currentUrl.includes("ahmed-sayed37.github.io/E-commerce//")) {
+  console.log("🚨 CRITICAL: Immediate URL fix needed!");
+  const fixedUrl = currentUrl.replace("//allorders", "/#/allorders").replace("//", "/#/");
+  console.log("✅ Immediate fix:", fixedUrl);
+  window.location.replace(fixedUrl);
+  return null; // Prevent rendering until URL is fixed
+}
+
 useEffect(() => {
   // Handle payment return from Stripe
   const handlePaymentReturn = () => {
@@ -42,11 +52,20 @@ useEffect(() => {
     console.log("Current URL:", currentUrl);
     console.log("Return to orders flag:", returnToOrders);
     
-    // Check if current URL has double slashes and fix it
+    // IMMEDIATE FIX: Check if current URL has double slashes and fix it immediately
     if (currentUrl.includes("//allorders")) {
-      console.log("Detected double slashes in URL, fixing...");
+      console.log("🚨 CRITICAL: Detected double slashes in URL, fixing immediately...");
       const fixedUrl = currentUrl.replace("//allorders", "/#/allorders");
-      console.log("Fixed URL:", fixedUrl);
+      console.log("✅ Fixed URL:", fixedUrl);
+      window.location.replace(fixedUrl);
+      return;
+    }
+    
+    // Also check for any other double slash patterns
+    if (currentUrl.includes("ahmed-sayed37.github.io/E-commerce//")) {
+      console.log("🚨 CRITICAL: Detected double slashes in base URL, fixing immediately...");
+      const fixedUrl = currentUrl.replace("//", "/#/");
+      console.log("✅ Fixed URL:", fixedUrl);
       window.location.replace(fixedUrl);
       return;
     }
@@ -65,13 +84,10 @@ useEffect(() => {
       console.log("Payment completed successfully, redirecting to orders...");
       toast.success("Payment completed successfully! Redirecting to orders...");
       
-      // Redirect to orders page with a small delay to ensure proper loading
-      setTimeout(() => {
-        // Use full URL replacement to avoid double slashes
-        const targetUrl = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
-        console.log("Redirecting to:", targetUrl);
-        window.location.href = targetUrl;
-      }, 500);
+      // Redirect to orders page immediately
+      const targetUrl = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
+      console.log("Redirecting to:", targetUrl);
+      window.location.replace(targetUrl);
     }
     
     // Also check for Stripe success parameters
@@ -86,12 +102,10 @@ useEffect(() => {
       // Clear any existing flags
       localStorage.removeItem('returnToOrders');
       
-      // Redirect to orders page
-      setTimeout(() => {
-        const targetUrl = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
-        console.log("Redirecting to:", targetUrl);
-        window.location.href = targetUrl;
-      }, 500);
+      // Redirect to orders page immediately
+      const targetUrl = "https://ahmed-sayed37.github.io/E-commerce/#/allorders";
+      console.log("Redirecting to:", targetUrl);
+      window.location.replace(targetUrl);
     }
   };
 
