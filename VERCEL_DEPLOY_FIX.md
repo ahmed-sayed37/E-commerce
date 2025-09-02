@@ -21,7 +21,7 @@ Error: Cannot find module @rollup/rollup-linux-x64-gnu. npm has a bug related to
    - تم إضافة إعدادات أكثر تفصيلاً لتوجيه Vercel بشكل صحيح
    - تم تحديد إطار العمل (Vite) وأوامر البناء ومجلد الإخراج
 
-## حل مشكلة Rollup والتبعيات الاختيارية
+## حل مشكلة Rollup والتبعيات الاختيارية (تحديث)
 
 1. **تعديل ملف package.json**
    - أضف القسم التالي إلى ملف package.json لتجاوز مشكلة التبعيات الاختيارية:
@@ -32,29 +32,21 @@ Error: Cannot find module @rollup/rollup-linux-x64-gnu. npm has a bug related to
    ```
    - هذا سيجبر المشروع على استخدام إصدار محدد من Rollup بدلاً من الاعتماد على التبعيات الاختيارية المرتبطة بنظام التشغيل
 
-2. **إنشاء ملف vercel-build.sh**
-   - قم بإنشاء ملف جديد في المجلد الرئيسي باسم `vercel-build.sh`:
-   ```bash
-   #!/bin/bash
-   # حل مشكلة Rollup في Vercel
-   npm install --no-optional
-   npm run build
-   ```
-   - هذا الملف سيتجاوز عملية التثبيت الافتراضية ويمنع تثبيت التبعيات الاختيارية
-
-3. **تحديث ملف vercel.json**
-   - قم بتعديل ملف vercel.json ليستخدم سكريبت البناء المخصص:
+2. **تحديث ملف vercel.json**
+   - قم بتعديل ملف vercel.json لاستخدام الخيار `--omit=optional` بدلاً من `--no-optional` (الذي أصبح قديمًا):
    ```json
    {
      "framework": "vite",
-     "buildCommand": "bash ./vercel-build.sh",
+     "buildCommand": "npm run build",
      "outputDirectory": "dist",
-     "installCommand": "npm install --no-optional",
+     "installCommand": "npm install --omit=optional",
      "rewrites": [
        { "source": "/(.*)", "destination": "/index.html" }
      ]
    }
    ```
+   - هذا التغيير يستخدم الصيغة الحديثة لتجاوز التبعيات الاختيارية في npm
+   - تم إزالة الاعتماد على ملف bash لأن Vercel قد لا يدعم تنفيذ ملفات bash بشكل صحيح
 
 ## خطوات النشر على Vercel
 
@@ -101,20 +93,21 @@ Error: Cannot find module @rollup/rollup-linux-x64-gnu. npm has a bug related to
    vercel dev
    ```
 
-## الإجراءات التي تم تنفيذها لحل مشكلة Rollup
+## الإجراءات التي تم تنفيذها لحل مشكلة Rollup (تحديث)
 
 لقد قمنا بتنفيذ الإجراءات التالية لحل مشكلة Rollup:
 
-1. **إنشاء ملف `vercel-build.sh`**
-   - تم إنشاء ملف بناء مخصص يستخدم خيار `--no-optional` لتجنب تثبيت التبعيات الاختيارية
+1. **تحديث ملف `vercel.json`**
+   - تم تغيير أمر التثبيت إلى: `npm install --omit=optional` بدلاً من `--no-optional`
+   - تم إزالة الاعتماد على ملف bash واستخدام أمر البناء المباشر: `npm run build`
 
-2. **تحديث ملف `vercel.json`**
-   - تم تغيير أمر البناء ليستخدم السكريبت المخصص: `bash ./vercel-build.sh`
-   - تم تغيير أمر التثبيت إلى: `npm install --no-optional`
-
-3. **تحديث ملف `package.json`**
+2. **تحديث ملف `package.json`**
    - تمت إضافة قسم `overrides` لتحديد إصدار محدد من Rollup (4.9.0) لتجنب المشكلة
 
+**ملاحظة مهمة**: تم تحديث الحل بعد ظهور رسالة خطأ تشير إلى أن الخيار `--no-optional` أصبح قديمًا وأن الخيار الموصى به هو `--omit=optional`. كما تم إزالة الاعتماد على ملف bash لأن Vercel قد لا يدعم تنفيذ ملفات bash بشكل صحيح.
+
 هذه التغييرات تعالج مشكلة التبعيات الاختيارية في npm التي تسبب فشل عملية البناء على Vercel. بعد دفع هذه التغييرات إلى GitHub وإعادة ربط المشروع بـ Vercel، يجب أن يتم نشر مشروعك بنجاح.
+
+**إذا استمرت المشكلة**: يرجى الاطلاع على ملف [ROLLUP_FIX_STEPS.md](./ROLLUP_FIX_STEPS.md) للحصول على خطوات إضافية وحلول بديلة لمشكلة Rollup.
 
 بعد اتباع هذه الخطوات، يجب أن يتم نشر مشروعك على Vercel بنجاح. إذا استمرت المشكلة، فقم بمراجعة سجلات البناء للحصول على معلومات أكثر تفصيلاً حول الخطأ.

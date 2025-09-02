@@ -7,10 +7,11 @@ cd "d:\New folder (3)\react\my-project"
 git status
 
 # إضافة جميع التغييرات
+# هذا سيشمل الملفات الجديدة: .npmrc و ROLLUP_FIX_STEPS.md
 git add .
 
 # عمل كوميت بالتغييرات
-git commit -m "إصلاح مشكلة Rollup في Vercel وتحديث ملفات الإعداد"
+git commit -m "تحديث حل مشكلة Rollup في Vercel باستخدام --omit=optional"
 
 # التأكد من وجود الريبو البعيد
 git remote -v
