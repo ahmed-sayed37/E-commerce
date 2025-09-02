@@ -1,0 +1,27 @@
+# أوامر Git لتحديث المشروع ورفعه على GitHub
+
+# التأكد من أنك في المجلد الصحيح
+cd "d:\New folder (3)\react\my-project"
+
+# التحقق من حالة الريبو الحالية
+git status
+
+# إضافة جميع التغييرات
+git add .
+
+# عمل كوميت بالتغييرات
+git commit -m "إصلاح مشكلة Rollup في Vercel وتحديث ملفات الإعداد"
+
+# التأكد من وجود الريبو البعيد
+git remote -v
+
+# إذا لم يكن موجودًا، أضفه
+# git remote add origin https://github.com/ahmed-sayed37/E-commerce.git
+
+# دفع التغييرات إلى الريبو البعيد
+git push origin main
+
+# إذا كان هناك خطأ في الدفع، يمكنك استخدام الأمر التالي لدمج التغييرات البعيدة أولاً
+# git pull origin main --rebase
+# ثم
+# git push origin main

@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "framework": "vite",
+  "buildCommand": "bash ./vercel-build.sh",
+  "outputDirectory": "dist",
+  "installCommand": "npm install --no-optional",
+  "github": {
+    "silent": true
+  }
+}

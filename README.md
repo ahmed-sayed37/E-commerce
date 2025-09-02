@@ -58,6 +58,53 @@ npm run dev
 npm run build
 ```
 
+## Deployment
+
+### Deploying to GitHub Pages
+
+This project is configured to automatically deploy to GitHub Pages when you push to the main branch.
+
+1. Make sure your repository is set up with GitHub Pages:
+   - Go to your repository settings
+   - Navigate to Pages section
+   - Set source to GitHub Actions
+
+2. Push your changes to the main branch:
+
+```bash
+git add .
+git commit -m "Your commit message"
+git push origin main
+```
+
+3. The GitHub Action will automatically build and deploy your project.
+
+### Deploying to Vercel
+
+This project includes a workflow for deploying to Vercel:
+
+1. Create a Vercel account and link your GitHub repository
+
+2. Generate a Vercel token:
+   - Go to your Vercel account settings
+   - Navigate to Tokens section
+   - Create a new token
+
+3. Add the token to your GitHub repository secrets:
+   - Go to your repository settings
+   - Navigate to Secrets and variables > Actions
+   - Add a new repository secret named `VERCEL_TOKEN` with your token value
+
+4. Push your changes to the main branch:
+
+```bash
+git add .
+git commit -m "Your commit message"
+git push origin main
+```
+
+5. The GitHub Action will automatically deploy your project to Vercel.
+
 ## Project Structure
 
 ```

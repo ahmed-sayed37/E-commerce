@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "homepage": "https://ahmed-sayed37.github.io/E-commerce",
   "type": "module",
+  "overrides": {
+    "rollup": "^4.9.0"
+  },
 
   "scripts": {
     "dev": "vite",

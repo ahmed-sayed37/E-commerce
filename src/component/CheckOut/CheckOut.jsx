@@ -54,9 +54,6 @@ export default function CheckOut({ totalCartPrice }) {
       if (data.status == "success") {
         localStorage.setItem('returnToOrders', 'true');
         toast.success("Redirecting to payment gateway...");
-        console.log("Payment successful, redirecting to payment gateway...");
-        console.log("Return URL will be: https://ahmed-sayed37.github.io/E-commerce");
-        console.log("After payment, user will be redirected to: https://ahmed-sayed37.github.io/E-commerce/#/allorders");
         window.location.href = data.session.url;
       }
     } catch (err) {
